@@ -33,11 +33,10 @@ const bookSchema = new mongoose.Schema({
     availableCopies:{
         type:Number,
         required:true
+    },
+    borrowedBy:{
+        type:[String],
     }
-    // borrowedBy:{
-    //     type:[String],
-
-    // }
 
 
 })
@@ -48,7 +47,7 @@ const books = mongoose.model("book",bookSchema)
 app.post("/book",async(req,res)=>{
     try {
         const book = new books(req.json)
-        await books.save(book)
+        await book.Save()
         if(!book){
             return res.status(400).json("missing required field")
         }
